@@ -39,7 +39,7 @@ body {
 .app-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 12px 24px;
   height: 100%;
   width: 100%;
   display: flex;

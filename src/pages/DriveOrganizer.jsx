@@ -529,7 +529,7 @@ export default function DriveOrganizer() {
         </div>
       )}
       {/* HEADER */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+      <div style={{ display: step === 3 ? 'none' : 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
         <div>
           <h1 style={{ fontSize: '2rem', margin: 0, display: 'flex', alignItems: 'center', gap: '12px' }}>
             <Folder size={32} color="var(--color-primary)" />
