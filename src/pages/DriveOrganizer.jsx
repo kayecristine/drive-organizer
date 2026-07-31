@@ -146,7 +146,10 @@ export default function DriveOrganizer() {
     setSelectedFileIds(new Set());
     
     try {
-      await Promise.all(idsToTrash.map(id => trashFile(id)));
+      for (let i = 0; i < idsToTrash.length; i += 20) {
+        const chunk = idsToTrash.slice(i, i + 20);
+        await Promise.all(chunk.map(id => trashFile(id).catch(e => console.error(e))));
+      }
     } catch (err) {
       alert("Failed to trash some files: " + err.message);
     } finally {
@@ -483,13 +486,16 @@ export default function DriveOrganizer() {
     setSelectedFileIds(new Set());
 
     try {
-      await Promise.all(fileIds.map(async (fileId) => {
-        if (targetFolderId === 'trash') {
-          await trashFile(fileId);
-        } else {
-          await moveFile(fileId, targetFolderId);
-        }
-      }));
+      for (let i = 0; i < fileIds.length; i += 20) {
+        const chunk = fileIds.slice(i, i + 20);
+        await Promise.all(chunk.map(async (fileId) => {
+          if (targetFolderId === 'trash') {
+            await trashFile(fileId).catch(e => console.error(e));
+          } else {
+            await moveFile(fileId, targetFolderId).catch(e => console.error(e));
+          }
+        }));
+      }
     } catch (err) {
       alert("Failed to move item(s): " + err.message);
     } finally {
@@ -709,7 +715,7 @@ export default function DriveOrganizer() {
                   <>
                     <button onClick={() => setSelectedFileIds(new Set())} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: '4px', padding: '4px 8px', color: 'var(--text-primary)', cursor: 'pointer' }}>Clear</button>
                     <button 
-                      onClick={() => handleDropFilesToFolder('trash', Array.from(selectedFileIds))}
+                      onClick={handleTrashSelected}
                       style={{ background: 'rgba(255, 85, 119, 0.1)', border: '1px solid var(--color-danger)', borderRadius: '4px', padding: '4px 8px', color: 'var(--color-danger)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
                     >
                       <Trash2 size={14} /> Trash
