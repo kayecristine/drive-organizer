@@ -226,10 +226,11 @@ export default function StorageHealth() {
         .sort((a, b) => new Date(a.createdTime) - new Date(b.createdTime))
         .slice(0, 25);
 
-      // Duplicate detection: group by name + size into arrays of 2+ files
+      // Duplicate detection: strict byte-for-byte matching using md5Checksum
       const grouped = {};
       for (const f of files) {
-        const key = `${f.name}__${f.size || '0'}`;
+        if (!f.md5Checksum) continue; // Only process files with a checksum (ignores folders and Google Docs)
+        const key = f.md5Checksum;
         if (!grouped[key]) grouped[key] = [];
         grouped[key].push(f);
       }
@@ -293,7 +294,11 @@ export default function StorageHealth() {
     }));
     setSelectedIds(new Set());
     
-    await Promise.all(ids.map(id => trashFile(id).catch(e => console.error(e))));
+    // Process in chunks of 20 to avoid Google API 429 Rate Limits
+    for (let i = 0; i < ids.length; i += 20) {
+      const chunk = ids.slice(i, i + 20);
+      await Promise.all(chunk.map(id => trashFile(id).catch(e => console.error(e))));
+    }
     setIsBulkDeleting(false);
   };
 
@@ -309,7 +314,10 @@ export default function StorageHealth() {
       duplicates: prev.duplicates.filter(f => !toDelete.some(d => d.id === f.id))
     }));
     
-    await Promise.all(toDelete.map(f => trashFile(f.id).catch(e => console.error(e))));
+    for (let i = 0; i < toDelete.length; i += 20) {
+      const chunk = toDelete.slice(i, i + 20);
+      await Promise.all(chunk.map(f => trashFile(f.id).catch(e => console.error(e))));
+    }
     setIsBulkDeleting(false);
   };
 
@@ -330,7 +338,10 @@ export default function StorageHealth() {
       duplicates: prev.duplicates.filter(f => !allToDelete.some(d => d.id === f.id))
     }));
     
-    await Promise.all(allToDelete.map(f => trashFile(f.id).catch(e => console.error(e))));
+    for (let i = 0; i < allToDelete.length; i += 20) {
+      const chunk = allToDelete.slice(i, i + 20);
+      await Promise.all(chunk.map(f => trashFile(f.id).catch(e => console.error(e))));
+    }
     setIsBulkDeleting(false);
   };
 
