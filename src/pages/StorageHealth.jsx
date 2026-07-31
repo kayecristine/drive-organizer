@@ -283,8 +283,17 @@ export default function StorageHealth() {
     if (!confirmed) return;
     setIsBulkDeleting(true);
     const ids = [...selectedIds];
-    for (const id of ids) await trashSingle(id);
+    
+    setStats(prev => ({
+      ...prev,
+      largest: prev.largest.filter(f => !ids.includes(f.id)),
+      oldest: prev.oldest.filter(f => !ids.includes(f.id)),
+      duplicates: prev.duplicates.filter(f => !ids.includes(f.id)),
+      totalFiles: prev.totalFiles - ids.length
+    }));
     setSelectedIds(new Set());
+    
+    await Promise.all(ids.map(id => trashFile(id).catch(e => console.error(e))));
     setIsBulkDeleting(false);
   };
 
@@ -292,13 +301,16 @@ export default function StorageHealth() {
     const toDelete = group.filter(f => f.id !== keptId);
     const confirmed = window.confirm(`Remove ${toDelete.length} duplicate(s), keeping the oldest copy?`);
     if (!confirmed) return;
-    for (const f of toDelete) await trashSingle(f.id);
-    // Remove the resolved group from duplicateGroups
+    
+    setIsBulkDeleting(true);
     setStats(prev => ({
       ...prev,
       duplicateGroups: prev.duplicateGroups.filter(g => !g.some(f => f.id === group[0].id)),
       duplicates: prev.duplicates.filter(f => !toDelete.some(d => d.id === f.id))
     }));
+    
+    await Promise.all(toDelete.map(f => trashFile(f.id).catch(e => console.error(e))));
+    setIsBulkDeleting(false);
   };
 
   const trashAllDuplicatesAcrossAllGroups = async () => {
@@ -312,13 +324,13 @@ export default function StorageHealth() {
     if (!confirmed) return;
     
     setIsBulkDeleting(true);
-    for (const f of allToDelete) await trashSingle(f.id);
-    
     setStats(prev => ({
       ...prev,
       duplicateGroups: [],
       duplicates: prev.duplicates.filter(f => !allToDelete.some(d => d.id === f.id))
     }));
+    
+    await Promise.all(allToDelete.map(f => trashFile(f.id).catch(e => console.error(e))));
     setIsBulkDeleting(false);
   };
 
