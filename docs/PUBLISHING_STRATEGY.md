@@ -4,29 +4,67 @@ This document outlines the step-by-step process for releasing products to the pu
 
 ---
 
-## Phase 1: Releasing a Free Chrome Extension (Current Goal)
+## Phase 1: Releasing a Free Chrome Extension
 
-Since Nexus interacts directly with users' personal Google Drive files, Google has strict security requirements. Follow these steps in order to get the extension into the hands of strangers.
+Because Nexus interacts directly with users' personal Google Drive files, Google has strict security requirements to ensure user safety. Below is the exact end-to-end workflow we used to take the MVP from local code to a verified, published Chrome Extension.
 
-### Step 1: Establish Your Identity (100% Free)
-Before submitting your app, you need a digital "home" for it so Google can verify you.
-1. **Setup Free Hosting**: Create a free account on Vercel, Netlify, or GitHub Pages. They will give you a free URL (e.g., `nexus-app.vercel.app` or `yourname.github.io`). You do NOT need to buy a custom domain unless you want to!
-2. **Write a Privacy Policy**: Create a simple text or HTML page stating that Nexus does not store user data on external servers and that the Gemini API key is kept locally in the browser. 
-3. **Deploy**: Host this privacy policy on your free URL (e.g., `nexus-app.vercel.app/privacy`).
+### 🗺️ The Publishing Workflow
 
-### Step 2: Google Cloud & OAuth Verification (100% Free)
-Because Nexus asks to read Google Drive, you must prove to Google that your app is safe.
-1. **Domain Verification**: Go to Google Search Console and verify ownership of your free URL (`nexus-app.vercel.app`). You can do this easily by uploading a small HTML file provided by Google to your free host.
-2. **OAuth Consent Screen**: In your Google Cloud Console, configure the OAuth screen. Add your verified free URL and the link to your Privacy Policy.
-3. **Record a Demo Video**: Record a 1–2 minute YouTube video showing exactly how a user logs in, how the extension sorts files, and why it needs Drive permissions.
-4. **Submit for Review**: Click "Publish App" in Google Cloud and submit the form with your video and privacy policy. *Approval takes 3–7 days.*
+```mermaid
+flowchart TD
+    %% Define Styles
+    classDef gitHub fill:#24292e,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef vercel fill:#000000,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef searchConsole fill:#4285F4,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef cloudConsole fill:#DB4437,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef webStore fill:#F4B400,stroke:#fff,stroke-width:2px,color:#fff;
 
-### Step 3: Chrome Web Store Publication
-Once Google Cloud verifies your OAuth screen, you can publish the actual extension.
+    A[1. Push Code to GitHub]:::gitHub --> B[2. Import into Vercel]:::vercel
+    B --> C[Vercel Generates Free URL\n(e.g., nexus-drive.vercel.app)]:::vercel
+    
+    C --> D[3. Google Search Console]:::searchConsole
+    D --> |"URL Prefix Property"| E[Add HTML Verification File\nto project 'public' folder]:::searchConsole
+    E --> |Push to GitHub| F[Vercel Auto-Deploys]:::vercel
+    F --> |Click Verify| G{Domain Verified!}:::searchConsole
+
+    G --> H[4. Google Auth Platform\n(Google Cloud)]:::cloudConsole
+    H --> |Branding Tab| I[Link Vercel Homepage & \nPrivacy Policy URL]:::cloudConsole
+    I --> J[Add exact domain to \nAuthorized Domains]:::cloudConsole
+    J --> K[Submit 1-2 Min\nYouTube Demo Video]:::cloudConsole
+    
+    K --> |Wait 3-7 Days for Approval| L[5. Chrome Web Store]:::webStore
+    L --> M[Zip 'dist' folder \n& Upload to Dashboard]:::webStore
+    M --> N(((Extension is Live!))):::webStore
+```
+
+### Step 1: Establish Your Identity via Vercel (100% Free)
+Before submitting your app, you need a digital "home" for your Privacy Policy so Google can verify you.
+1. **GitHub Push**: Push your project repository to GitHub.
+2. **Vercel Import**: Go to Vercel, click "Add New Project", and import your GitHub repository. Vercel will automatically build the Vite app and assign you a free URL.
+3. **Rename Domain (Optional)**: In Vercel's top navigation, go to **Domains** and edit the URL to something clean (e.g., `nexus-drive-organizer.vercel.app`).
+4. **Privacy Policy**: Ensure your `public/privacy.html` file is pushed to GitHub. Vercel will automatically host it at `your-url.vercel.app/privacy.html`.
+
+### Step 2: Google Search Console Verification
+Because you are using a `.vercel.app` subdomain, you cannot use DNS verification.
+1. **URL Prefix**: In Google Search Console, use the **URL prefix** property method and enter your exact Vercel URL.
+2. **HTML File**: Choose the **HTML file** verification method. Google will give you a file name (e.g., `google123.html`).
+3. **Deploy & Verify**: Create that file in your `public/` directory with the required `google-site-verification` text. Push it to GitHub, wait for Vercel to rebuild (30s), and hit **VERIFY** in Search Console.
+
+### Step 3: Google Auth Platform (Cloud Console)
+Now that Google knows you own the domain, you must link it to your OAuth consent screen.
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/) > **APIs & Services** > **OAuth consent screen** (now called Google Auth Platform).
+2. Under the **Branding** tab, paste your Vercel URL into the **Application home page**.
+3. Paste the path to your privacy policy into **Application privacy policy link**.
+4. In the **Authorized domains** section (or the Verification Center), add your exact domain (e.g., `nexus-drive-organizer.vercel.app`). *Do not use just 'vercel.app' as it will be rejected as an invalid top private domain.*
+5. **Record a Demo**: Record a 1–2 minute unlisted YouTube video showing a user logging in, sorting files, and explaining why Drive permissions are needed.
+6. Submit the app for verification.
+
+### Step 4: Chrome Web Store Publication
 1. **Developer Registration**: Go to the Chrome Developer Dashboard and pay the one-time $5 developer fee.
-2. **Build the Extension**: Run `npm run build` in your terminal to generate the final `dist/` folder. Zip this folder.
-3. **Store Listing**: Upload the Zip file. Add your logo, screenshots (use our Framer mockups!), and a catchy description.
-4. **Publish**: Hit publish! Your extension is now live and free for anyone to install.
+2. **Build the Extension**: Run `npm run build` in your terminal to generate the final `dist/` folder.
+3. **Zip It**: Compress the `dist/` folder into a `.zip` file.
+4. **Store Listing**: Upload the Zip file. Add your custom neon logo, screenshots, and a catchy description.
+5. **Publish**: Hit publish! Users will simply click "Add to Chrome" to install it.
 
 ---
 
