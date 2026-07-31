@@ -163,6 +163,14 @@ export default function DriveOrganizer() {
     handleSelectFolder(prevFolderId, true);
   };
 
+  const handleLogout = () => {
+    if (typeof chrome !== 'undefined' && chrome.identity && chrome.identity.clearAllCachedAuthTokens) {
+      chrome.identity.clearAllCachedAuthTokens(() => {
+        window.location.reload();
+      });
+    }
+  };
+
   // Manual Triage Modal State (Rename)
   const [activeFile, setActiveFile] = useState(null);
   const [editName, setEditName] = useState('');
@@ -783,6 +791,18 @@ export default function DriveOrganizer() {
                 >
                   <Trash2 size={18} />
                   <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>Trash Bin</span>
+                </div>
+                
+                {/* LOGOUT BUTTON */}
+                <div 
+                  onClick={handleLogout}
+                  style={{ 
+                    padding: '12px 16px', background: 'transparent', border: '1px solid transparent', borderRadius: '8px',
+                    display: 'flex', alignItems: 'center', gap: '12px', transition: 'all 0.2s', color: 'var(--text-secondary)', cursor: 'pointer', marginTop: 'auto'
+                  }}
+                >
+                  <X size={18} />
+                  <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>Logout</span>
                 </div>
               </div>
             </div>
