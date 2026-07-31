@@ -585,9 +585,17 @@ export default function DriveOrganizer() {
       )}
 
       {error && (
-        <div style={{ background: '#fef2f2', border: '1px solid #f87171', color: '#b91c1c', padding: '16px', borderRadius: '8px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <AlertCircle size={20} />
-          {error}
+        <div style={{ background: '#fef2f2', border: '1px solid #f87171', color: '#b91c1c', padding: '16px', borderRadius: '8px', marginBottom: '24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <AlertCircle size={20} />
+            <span>{error}</span>
+          </div>
+          <button 
+            onClick={handleLogout}
+            style={{ background: 'white', border: '1px solid #f87171', color: '#b91c1c', padding: '6px 12px', borderRadius: '6px', fontWeight: 600, cursor: 'pointer', fontSize: '0.85rem' }}
+          >
+            Reset Login
+          </button>
         </div>
       )}
 
