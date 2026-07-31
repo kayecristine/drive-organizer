@@ -173,6 +173,9 @@ export default function DriveOrganizer() {
   // Drag and Drop State
   const [isMoving, setIsMoving] = useState(false);
 
+  // Multi-select State
+  const [lastSelectedIndex, setLastSelectedIndex] = useState(null);
+
   useEffect(() => {
     initGoogleDrive();
 
@@ -917,7 +920,7 @@ export default function DriveOrganizer() {
 
                   return (
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '10px' }}>
-                      {displayedFiles.map(file => {
+                      {displayedFiles.map((file, index) => {
                         const isFolder = file.mimeType === 'application/vnd.google-apps.folder';
                         const isSelected = selectedFileIds.has(file.id);
                         
@@ -946,12 +949,21 @@ export default function DriveOrganizer() {
                             }}
                             onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 16px rgba(0,0,0,0.2)'; }}
                             onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
-                            onClick={() => {
+                            onClick={(e) => {
                               const newSet = new Set(selectedFileIds);
-                              if (newSet.has(file.id)) {
-                                newSet.delete(file.id);
+                              if (e.shiftKey && lastSelectedIndex !== null) {
+                                const start = Math.min(lastSelectedIndex, index);
+                                const end = Math.max(lastSelectedIndex, index);
+                                for (let i = start; i <= end; i++) {
+                                  newSet.add(displayedFiles[i].id);
+                                }
                               } else {
-                                newSet.add(file.id);
+                                if (newSet.has(file.id)) {
+                                  newSet.delete(file.id);
+                                } else {
+                                  newSet.add(file.id);
+                                }
+                                setLastSelectedIndex(index);
                               }
                               setSelectedFileIds(newSet);
                             }}
@@ -965,9 +977,22 @@ export default function DriveOrganizer() {
                                 type="checkbox"
                                 checked={isSelected}
                                 onChange={(e) => {
+                                  // The checkbox is inside a stopPropagation div, 
+                                  // so we'll simulate the same shift-click logic here for convenience
                                   const newSet = new Set(selectedFileIds);
-                                  if (e.target.checked) newSet.add(file.id);
-                                  else newSet.delete(file.id);
+                                  // We can't access e.shiftKey directly on the native onChange of a checkbox across all browsers reliably without the click event, 
+                                  // but React synthetic event passes the nativeEvent which might have it.
+                                  if (e.nativeEvent && e.nativeEvent.shiftKey && lastSelectedIndex !== null) {
+                                    const start = Math.min(lastSelectedIndex, index);
+                                    const end = Math.max(lastSelectedIndex, index);
+                                    for (let i = start; i <= end; i++) {
+                                      newSet.add(displayedFiles[i].id);
+                                    }
+                                  } else {
+                                    if (e.target.checked) newSet.add(file.id);
+                                    else newSet.delete(file.id);
+                                    setLastSelectedIndex(index);
+                                  }
                                   setSelectedFileIds(newSet);
                                 }}
                                 style={{ cursor: 'pointer', transform: 'scale(1.2)' }}
