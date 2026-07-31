@@ -163,11 +163,15 @@ export default function DriveOrganizer() {
     handleSelectFolder(prevFolderId, true);
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await clearApiKey();
+    setSavedKey(null);
     if (typeof chrome !== 'undefined' && chrome.identity && chrome.identity.clearAllCachedAuthTokens) {
       chrome.identity.clearAllCachedAuthTokens(() => {
         window.location.reload();
       });
+    } else {
+      window.location.reload();
     }
   };
 
