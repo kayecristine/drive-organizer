@@ -846,8 +846,10 @@ export default function DriveOrganizer() {
                     </label>
                   </div>
                 </div>
+              </div>
 
-                {/* DRAG AND DROP ZONE BANNER */}
+              {/* DRAG AND DROP ZONE BANNER (NOW OUTSIDE STICKY AREA) */}
+              <div style={{ paddingBottom: '16px' }}>
                 <div
                   onDragOver={(e) => e.preventDefault()}
                   onDragEnter={(e) => { e.currentTarget.style.borderColor = 'var(--color-primary)'; e.currentTarget.style.background = 'rgba(16, 185, 129, 0.08)'; }}
