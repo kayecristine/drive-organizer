@@ -23,9 +23,7 @@
   "oauth2": {
     "client_id": "1001516163524-ol9hme0u6h8aibn36gggp3uc8359nj7e.apps.googleusercontent.com",
     "scopes": [
-      "https://www.googleapis.com/auth/drive",
-      "https://www.googleapis.com/auth/calendar",
-      "https://www.googleapis.com/auth/calendar.events"
+      "https://www.googleapis.com/auth/drive"
     ]
   },
   "host_permissions": [
