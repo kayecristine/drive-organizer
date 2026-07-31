@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "description": "Organize your Google Drive files with AI-powered suggestions and smart triage.",
   "icons": {
-    "16": "nexus-logo.svg",
-    "48": "nexus-logo.svg",
-    "128": "nexus-logo.svg"
+    "16": "nexus-logo.png",
+    "48": "nexus-logo.png",
+    "128": "nexus-logo.png"
   },
   "background": {
     "service_worker": "background.js"
