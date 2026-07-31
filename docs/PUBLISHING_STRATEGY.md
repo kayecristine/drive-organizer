@@ -19,22 +19,22 @@ flowchart TD
     classDef cloudConsole fill:#DB4437,stroke:#fff,stroke-width:2px,color:#fff;
     classDef webStore fill:#F4B400,stroke:#fff,stroke-width:2px,color:#fff;
 
-    A[1. Push Code to GitHub]:::gitHub --> B[2. Import into Vercel]:::vercel
-    B --> C[Vercel Generates Free URL\n(e.g., nexus-drive.vercel.app)]:::vercel
+    A["1. Push Code to GitHub"]:::gitHub --> B["2. Import into Vercel"]:::vercel
+    B --> C["Vercel Generates Free URL\n(e.g., nexus-drive.vercel.app)"]:::vercel
     
-    C --> D[3. Google Search Console]:::searchConsole
-    D --> |"URL Prefix Property"| E[Add HTML Verification File\nto project 'public' folder]:::searchConsole
-    E --> |Push to GitHub| F[Vercel Auto-Deploys]:::vercel
-    F --> |Click Verify| G{Domain Verified!}:::searchConsole
+    C --> D["3. Google Search Console"]:::searchConsole
+    D --> |"URL Prefix Property"| E["Add HTML Verification File\nto project 'public' folder"]:::searchConsole
+    E --> |Push to GitHub| F["Vercel Auto-Deploys"]:::vercel
+    F --> |Click Verify| G{"Domain Verified!"}:::searchConsole
 
-    G --> H[4. Google Auth Platform\n(Google Cloud)]:::cloudConsole
-    H --> |Branding Tab| I[Link Vercel Homepage & \nPrivacy Policy URL]:::cloudConsole
-    I --> J[Add exact domain to \nAuthorized Domains]:::cloudConsole
-    J --> K[Submit 1-2 Min\nYouTube Demo Video]:::cloudConsole
+    G --> H["4. Google Auth Platform\n(Google Cloud)"]:::cloudConsole
+    H --> |Branding Tab| I["Link Vercel Homepage & \nPrivacy Policy URL"]:::cloudConsole
+    I --> J["Add exact domain to \nAuthorized Domains"]:::cloudConsole
+    J --> K["Submit 1-2 Min\nYouTube Demo Video"]:::cloudConsole
     
-    K --> |Wait 3-7 Days for Approval| L[5. Chrome Web Store]:::webStore
-    L --> M[Zip 'dist' folder \n& Upload to Dashboard]:::webStore
-    M --> N(((Extension is Live!))):::webStore
+    K --> |Wait 3-7 Days for Approval| L["5. Chrome Web Store"]:::webStore
+    L --> M["Zip 'dist' folder \n& Upload to Dashboard"]:::webStore
+    M --> N((("Extension is Live!"))):::webStore
 ```
 
 ### Step 1: Establish Your Identity via Vercel (100% Free)
