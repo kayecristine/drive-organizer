@@ -706,7 +706,15 @@ export default function DriveOrganizer() {
                   Select All
                 </button>
                 {selectedFileIds.size > 0 && (
-                  <button onClick={() => setSelectedFileIds(new Set())} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: '4px', padding: '4px 8px', color: 'var(--text-primary)', cursor: 'pointer' }}>Clear</button>
+                  <>
+                    <button onClick={() => setSelectedFileIds(new Set())} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: '4px', padding: '4px 8px', color: 'var(--text-primary)', cursor: 'pointer' }}>Clear</button>
+                    <button 
+                      onClick={() => handleDropFilesToFolder('trash', Array.from(selectedFileIds))}
+                      style={{ background: 'rgba(255, 85, 119, 0.1)', border: '1px solid var(--color-danger)', borderRadius: '4px', padding: '4px 8px', color: 'var(--color-danger)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
+                    >
+                      <Trash2 size={14} /> Trash
+                    </button>
+                  </>
                 )}
               </div>
               {isMoving && <span style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', color: 'var(--color-primary)' }}><RefreshCw size={14} className="spin" /> Moving item(s)...</span>}
