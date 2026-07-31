@@ -664,12 +664,27 @@ export default function DriveOrganizer() {
               </h2>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-              {selectedFileIds.size > 0 && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                  <span>{selectedFileIds.size} selected</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                {selectedFileIds.size > 0 && <span>{selectedFileIds.size} selected</span>}
+                <button 
+                  onClick={() => {
+                    const rawList = globalSearchResults || files;
+                    const displayed = rawList.filter(file => {
+                      const isFolder = file.mimeType === 'application/vnd.google-apps.folder';
+                      if (activeTab === 'folders' && !isFolder) return false;
+                      if (activeTab === 'files' && isFolder) return false;
+                      return true;
+                    });
+                    setSelectedFileIds(new Set(displayed.map(f => f.id)));
+                  }} 
+                  style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: '4px', padding: '4px 8px', color: 'var(--text-primary)', cursor: 'pointer' }}
+                >
+                  Select All
+                </button>
+                {selectedFileIds.size > 0 && (
                   <button onClick={() => setSelectedFileIds(new Set())} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: '4px', padding: '4px 8px', color: 'var(--text-primary)', cursor: 'pointer' }}>Clear</button>
-                </div>
-              )}
+                )}
+              </div>
               {isMoving && <span style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', color: 'var(--color-primary)' }}><RefreshCw size={14} className="spin" /> Moving item(s)...</span>}
             </div>
           </div>
