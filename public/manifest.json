@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Nexus File Manager",
+  "version": "1.0.0",
+  "description": "Organize your Google Drive files with AI-powered suggestions and smart triage.",
+  "icons": {
+    "16": "nexus-logo.svg",
+    "48": "nexus-logo.svg",
+    "128": "nexus-logo.svg"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Nexus File Manager"
+  },
+  "permissions": [
+    "identity",
+    "storage",
+    "alarms",
+    "notifications"
+  ],
+  "oauth2": {
+    "client_id": "1001516163524-ol9hme0u6h8aibn36gggp3uc8359nj7e.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/calendar",
+      "https://www.googleapis.com/auth/calendar.events"
+    ]
+  },
+  "host_permissions": [
+    "https://www.googleapis.com/*"
+  ]
+}
