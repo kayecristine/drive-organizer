@@ -198,7 +198,18 @@ export async function trashFile(fileId) {
     body: JSON.stringify({ trashed: true })
   });
   
-  if (!res.ok) throw new Error('Failed to trash file: ' + res.statusText);
+  if (!res.ok) {
+    let errorMsg = res.statusText;
+    try {
+      const errData = await res.json();
+      if (errData?.error?.message) {
+        errorMsg = errData.error.message;
+      }
+    } catch (e) {
+      // Ignore json parse error
+    }
+    throw new Error(errorMsg);
+  }
   return await res.json();
 }
 
