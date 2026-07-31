@@ -88,7 +88,15 @@ function buildPrompt(files) {
     return line;
   }).join('\n');
 
-  return `You are a Google Drive organization assistant. Group the following files into logical folder categories based on their names and content previews. Return a JSON array where each item has "folderName" (string) and "fileIds" (array of strings). Use 3-8 meaningful category names. Only return valid JSON, no explanation.
+  return `You are an expert Google Drive organization assistant. Group the following files into logical folder categories based on their names, content previews, and strict attention to their MIME types. 
+
+CRITICAL RULES:
+1. NEVER group photos (image/*) or videos (video/*) into folders meant for documents (e.g., "PDFs", "Documents", "Spreadsheets").
+2. Media files should go into media-specific folders (e.g., "Photos", "Videos", "Media", or event-specific media folders).
+3. Document files should go into document-specific folders.
+4. Use 3-8 meaningful category names. 
+
+Return a JSON array where each item has "folderName" (string) and "fileIds" (array of strings). Only return valid JSON, no explanation.
 
 Files:
 ${fileList}
