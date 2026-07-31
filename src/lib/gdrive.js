@@ -80,7 +80,7 @@ export async function uploadToDrive(file, metadata) {
 
 export async function getLooseFiles() {
   await ensureDriveToken();
-  const query = encodeURIComponent("'root' in parents and trashed = false");
+  const query = encodeURIComponent("'root' in parents and trashed = false and 'me' in owners");
   const res = await fetch(`https://www.googleapis.com/drive/v3/files?q=${query}&fields=files(id,name,mimeType,thumbnailLink,webViewLink)&pageSize=1000`, {
     headers: { 'Authorization': 'Bearer ' + accessToken }
   });
@@ -153,7 +153,7 @@ export async function renameFile(fileId, newName) {
 
 export async function listFolders() {
   await ensureDriveToken();
-  const query = encodeURIComponent("'root' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false");
+  const query = encodeURIComponent("'root' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false and 'me' in owners");
   const res = await fetch(`https://www.googleapis.com/drive/v3/files?q=${query}&fields=files(id,name)&pageSize=1000`, {
     headers: { 'Authorization': 'Bearer ' + accessToken }
   });
@@ -165,7 +165,7 @@ export async function listFolders() {
 
 export async function getFilesInFolder(folderId) {
   await ensureDriveToken();
-  const query = encodeURIComponent(`'${folderId}' in parents and trashed = false`);
+  const query = encodeURIComponent(`'${folderId}' in parents and trashed = false and 'me' in owners`);
   const res = await fetch(`https://www.googleapis.com/drive/v3/files?q=${query}&fields=files(id,name,mimeType,thumbnailLink,webViewLink)&pageSize=1000`, {
     headers: { 'Authorization': 'Bearer ' + accessToken }
   });
@@ -177,7 +177,7 @@ export async function getFilesInFolder(folderId) {
 
 export async function getSubfolders(parentFolderId) {
   await ensureDriveToken();
-  const query = encodeURIComponent(`'${parentFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false`);
+  const query = encodeURIComponent(`'${parentFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false and 'me' in owners`);
   const res = await fetch(`https://www.googleapis.com/drive/v3/files?q=${query}&fields=files(id,name)&pageSize=1000`, {
     headers: { 'Authorization': 'Bearer ' + accessToken }
   });
@@ -204,7 +204,7 @@ export async function trashFile(fileId) {
 
 export async function searchDrive(searchQuery) {
   await ensureDriveToken();
-  const query = encodeURIComponent(`name contains '${searchQuery}' and trashed = false`);
+  const query = encodeURIComponent(`name contains '${searchQuery}' and trashed = false and 'me' in owners`);
   const res = await fetch(`https://www.googleapis.com/drive/v3/files?q=${query}&fields=files(id,name,mimeType,thumbnailLink,webViewLink)&pageSize=1000`, {
     headers: { 'Authorization': 'Bearer ' + accessToken }
   });
@@ -233,7 +233,7 @@ export async function getStorageStats() {
 
   do {
     const params = new URLSearchParams({
-      q: 'trashed = false',
+      q: "trashed = false and 'me' in owners",
       fields: 'nextPageToken,files(id,name,mimeType,size,createdTime,modifiedTime,md5Checksum,webViewLink,thumbnailLink,parents)',
       pageSize: '1000',
       ...(pageToken ? { pageToken } : {})
