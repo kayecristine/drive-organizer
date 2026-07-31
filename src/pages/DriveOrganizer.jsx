@@ -899,7 +899,7 @@ export default function DriveOrganizer() {
                   }
 
                   return (
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '16px' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '10px' }}>
                       {displayedFiles.map(file => {
                         const isFolder = file.mimeType === 'application/vnd.google-apps.folder';
                         const isSelected = selectedFileIds.has(file.id);
@@ -923,8 +923,8 @@ export default function DriveOrganizer() {
                             style={{ 
                               background: isSelected ? 'rgba(16, 185, 129, 0.1)' : 'var(--bg-panel)', 
                               border: isSelected ? '1px solid var(--color-primary)' : '1px solid var(--border-color)', 
-                              borderRadius: '12px', 
-                              padding: '12px', cursor: 'grab', display: 'flex', flexDirection: 'column', gap: '10px',
+                              borderRadius: '10px', 
+                              padding: '8px', cursor: 'grab', display: 'flex', flexDirection: 'column', gap: '6px',
                               transition: 'transform 0.2s, box-shadow 0.2s', position: 'relative'
                             }}
                             onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 16px rgba(0,0,0,0.2)'; }}
@@ -941,7 +941,7 @@ export default function DriveOrganizer() {
                           >
                             {/* Checkbox Overlay */}
                             <div 
-                              style={{ position: 'absolute', top: 12, left: 12, zIndex: 10 }}
+                              style={{ position: 'absolute', top: 8, left: 8, zIndex: 10 }}
                               onClick={(e) => e.stopPropagation()}
                             >
                               <input 
@@ -960,13 +960,13 @@ export default function DriveOrganizer() {
                             {/* Click overlay for renaming / triage */}
                             <button 
                               onClick={(e) => { e.stopPropagation(); openModal(file); }}
-                              style={{ position: 'absolute', top: 16, right: 16, background: 'rgba(0,0,0,0.6)', border: 'none', borderRadius: '4px', padding: '4px', cursor: 'pointer', zIndex: 10, color: 'white' }}
+                              style={{ position: 'absolute', top: 8, right: 8, background: 'rgba(0,0,0,0.6)', border: 'none', borderRadius: '4px', padding: '4px', cursor: 'pointer', zIndex: 10, color: 'white' }}
                               title="Triage & Metadata"
                             >
                               <Edit2 size={14} />
                             </button>
 
-                            <div style={{ height: '110px', background: 'var(--hover-color)', borderRadius: '8px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', pointerEvents: 'none' }}>
+                            <div style={{ height: '80px', background: 'var(--hover-color)', borderRadius: '6px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', pointerEvents: 'none' }}>
                               {isFolder ? (
                                 <Folder size={64} color="var(--color-primary)" style={{ opacity: 0.8 }} />
                               ) : (
