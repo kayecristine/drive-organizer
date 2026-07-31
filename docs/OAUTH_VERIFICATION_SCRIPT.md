@@ -1,6 +1,6 @@
 # Google OAuth Verification - Video Script
 
-*This document outlines the exact step-by-step script and recording instructions required to submit your Google OAuth Consent Screen for verification by the Google Trust & Safety Team.*
+*This document outlines a persuasive, pitch-style script designed to sell the value of Nexus Drive Organizer to the Google Trust & Safety Team, while still perfectly hitting their strict compliance requirements.*
 
 ---
 
@@ -12,42 +12,46 @@ Before you hit record, ensure the following are visible on your screen:
 
 ---
 
-## 📝 The Video Script / Flow
+## 📝 The Video Pitch / Flow
 
-**1. Introduce the App & Purpose**
-> *"Hello Google Trust & Safety Team. My name is [Your Name] and I am demonstrating the OAuth flow and functionality for my Chrome Extension, Nexus Drive Organizer. This app helps users declutter their Drive using AI categorization, storage analytics, and bulk organization tools."*
+**1. The Hook & Introduction**
+> *"Hello Google Trust & Safety Team. My name is [Your Name], and I'm thrilled to present Nexus Drive Organizer. We built Nexus to solve a problem every professional faces: a cluttered, chaotic Google Drive. Our Chrome extension transforms digital hoarding into a beautifully organized workspace in seconds using AI."*
 
-**2. Demonstrate How the User Logs In**
-- Click on the Nexus extension icon to open the app.
-- Click the **"Scan My Drive"** or **"AI Auto-Pilot"** button to trigger the Google Login pop-up.
-
-**3. Show the Client ID (CRITICAL STEP)**
+**2. The Login & Client ID Verification (CRITICAL STEP)**
+- Click on the Nexus extension icon.
+- Click the **"Scan My Drive"** button.
 - When the Google Sign-in pop-up appears, **pause and highlight the URL bar**.
-- Scroll through the URL so the reviewer can clearly see your `client_id=...` parameter.
-> *"As you can see in the URL bar, the Client ID perfectly matches the Client ID registered in my Google Cloud Console."*
+> *"Before we dive into the magic, I want to verify our OAuth flow. As you can see right here in the URL bar, our Client ID perfectly matches the one registered in our Google Cloud Console."*
 
-**4. Show the Consent Screen & Justify the Scopes**
+**3. The Pitch for Permissions**
 - Proceed to select your Google Account.
-- When the permissions screen appears, highlight the exact scope requested (Google Drive).
-> *"The app requests the restricted `https://www.googleapis.com/auth/drive` scope. We absolutely require this full scope because the core functionality of the app is to allow users to fully manage their Drive—this includes reading file metadata to find duplicates, organizing loose files into specific folders, and physically moving unneeded files to the trash."*
+- When the permissions screen appears, highlight the Google Drive scope.
+> *"Nexus is a powerhouse tool, which is why we request the restricted `auth/drive` scope. To deliver on our promise of a clean Drive, the app fundamentally needs the ability to read file data, seamlessly move items into organized folders, and permanently send wasted duplicates to the trash."*
 
-**5. Demonstrate Feature 1: Storage Health & Duplicates (Read & Trash)**
+**4. Feature Showcase: The AI Auto-Pilot**
 - Click **"Allow"** to finish the login.
-- Navigate to the **Storage Health** tab. Let the scan run.
-> *"Here, the app is reading the user's Drive data to display storage quotas and calculate byte-for-byte duplicates using MD5 checksums. I will now click 'Remove Duplicate', which requires write access to move the redundant file to the user's Trash."*
+- Once loaded, navigate to the **File Manager** and click **"AI Auto-Pilot"**.
+> *"Welcome to Nexus. Let's start with our flagship feature: AI Auto-Pilot. Instead of spending hours manually sorting files, Nexus reads your loose file metadata and instantly groups them into intelligent, logical folders. It's like having a personal assistant for your digital life."*
+
+**5. Feature Showcase: Manual Triage (Drag & Drop)**
+- Drag and drop a file into one of the folders.
+> *"For users who want hands-on control, our Manual Triage interface allows for lightning-fast organization. By dragging a file, Nexus uses its write access to instantly update the file's location in Google Drive."*
+
+**6. Feature Showcase: Storage Health & Bulk Deletion**
+- Navigate to the **Storage Health** tab. Wait for the scan to finish.
+> *"Finally, we help users reclaim their storage space. Nexus scans the drive to identify byte-for-byte duplicates using MD5 checksums. With a single click, users can clear out the clutter. I'll delete a duplicate right now, demonstrating exactly why we need write access to move redundant files to the user's trash."*
 - *Action: Click a trash button on a duplicate file.*
 
-**6. Demonstrate Feature 2: Manual Triage (Move)**
-- Navigate to the **File Manager** tab.
-> *"This is the Manual Triage feature. It reads the user's loose files in their root directory and their existing folder structure. By dragging and dropping a file here, the app updates the file's 'parents' metadata to move it into a new folder."*
-- *Action: Drag and drop a file into a folder to show it works.*
+**7. The Closing**
+> *"Nexus Drive Organizer isn't just a file manager; it's a productivity multiplier. Because our entire value proposition relies on analyzing, moving, and trashing files, the full Google Drive scope is absolutely critical. Thank you for your time, and we can't wait to bring Nexus to the Chrome Web Store."*
 
-**7. Demonstrate Feature 3: AI Auto-Pilot (Read)**
-- Click the **"AI Auto-Pilot"** button.
-> *"Finally, the AI Auto-Pilot reads the file names and MIME types, then automatically groups them into logical folders, drastically reducing the time it takes to organize a messy Drive."*
+---
 
-**8. Conclusion**
-> *"Because all these core features require reading metadata, moving files between folders, and trashing files, the full Google Drive scope is essential for Nexus Drive Organizer to function. Thank you for your time reviewing our application."*
+## 📤 Submission Steps
+1. Upload the video to YouTube as **Unlisted**.
+2. Go to your Google Cloud Console > APIs & Services > OAuth consent screen.
+3. Paste the YouTube link into the "YouTube video link" field in your verification submission.
+4. Submit for review!
 
 ---
 
