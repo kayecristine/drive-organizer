@@ -107,7 +107,7 @@ async function callOpenAI(apiKey, files) {
       model: 'gpt-4o-mini',
       messages: [{ role: 'user', content: buildPrompt(files) }],
       temperature: 0.3,
-      max_tokens: 1000
+      max_tokens: 4096
     })
   });
 
