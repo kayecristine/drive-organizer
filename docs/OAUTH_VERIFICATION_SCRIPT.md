@@ -28,19 +28,20 @@ Before you hit record, ensure the following are visible on your screen:
 - When the permissions screen appears, highlight the Google Drive scope.
 > *"Nexus is a comprehensive file manager, which is why we request the restricted `auth/drive` scope. To organize a user's Drive, the app fundamentally needs the ability to read file data, move items into organized folders, and permanently send duplicate files to the trash."*
 
-**4. Feature Showcase: The AI Auto-Pilot**
+**4. Feature Showcase: Manual Triage (Drag & Drop)**
 - Click **"Allow"** to finish the login.
-- Once loaded, navigate to the **File Manager** and click **"AI Auto-Pilot"**.
-> *"Let's start with our AI Auto-Pilot feature. Instead of users spending hours sorting files manually, Nexus reads their loose file metadata and automatically suggests logical folders to group them into, saving significant time."*
+- Once loaded, navigate to the **File Manager** tab.
+> *"Let's start with our Manual Triage interface, which allows for quick, hands-on organization. By dragging a file here, Nexus uses its write access to instantly update the file's location in Google Drive."*
+- *Action: Drag and drop a file into one of the folders to show it works.*
 
-**5. Feature Showcase: Manual Triage (Drag & Drop)**
-- Drag and drop a file into one of the folders.
-> *"For users who prefer manual control, our Triage interface allows for quick organization. By dragging a file here, Nexus uses its write access to instantly update the file's location in Google Drive."*
-
-**6. Feature Showcase: Storage Health & Bulk Deletion**
+**5. Feature Showcase: Storage Health & Bulk Deletion**
 - Navigate to the **Storage Health** tab. Wait for the scan to finish.
-> *"Finally, we help users reclaim their storage space. Nexus scans the drive to identify exact duplicates using MD5 checksums. I will delete one of these duplicates right now, demonstrating exactly why we need write access to move redundant files to the user's trash."*
+> *"Next, we help users reclaim their storage space. Nexus reads the drive to identify exact byte-for-byte duplicates using MD5 checksums. I will delete one of these duplicates right now, demonstrating exactly why we need write access to move redundant files to the user's trash."*
 - *Action: Click a trash button on a duplicate file.*
+
+**6. Feature Showcase: The AI Auto-Pilot**
+- Navigate back to the **File Manager** and click **"AI Auto-Pilot"**.
+> *"Finally, for automated organization, our AI Auto-Pilot reads loose file metadata and automatically suggests logical folders to group them into, saving significant manual effort."*
 
 **7. The Closing**
 > *"Because our core functionality relies entirely on reading, moving, and trashing files, the full Google Drive scope is necessary for Nexus Drive Organizer to work. Thank you for your time and for reviewing our application."*
