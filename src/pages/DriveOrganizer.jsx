@@ -136,15 +136,16 @@ export default function DriveOrganizer() {
     if (!confirmed) return;
     
     setIsMoving(true);
+    // Optimistic UI Update
+    setFiles(prev => prev.filter(f => !selectedFileIds.has(f.id)));
+    if (globalSearchResults) {
+      setGlobalSearchResults(prev => prev.filter(f => !selectedFileIds.has(f.id)));
+    }
+    const idsToTrash = Array.from(selectedFileIds);
+    setSelectedFileIds(new Set());
+    
     try {
-      for (const id of selectedFileIds) {
-        await trashFile(id);
-      }
-      setFiles(prev => prev.filter(f => !selectedFileIds.has(f.id)));
-      if (globalSearchResults) {
-        setGlobalSearchResults(prev => prev.filter(f => !selectedFileIds.has(f.id)));
-      }
-      setSelectedFileIds(new Set());
+      await Promise.all(idsToTrash.map(id => trashFile(id)));
     } catch (err) {
       alert("Failed to trash some files: " + err.message);
     } finally {
@@ -457,26 +458,25 @@ export default function DriveOrganizer() {
     if (fileIds.length === 0) return;
 
     setIsMoving(true);
+    
+    // Optimistic UI Update
+    setFiles(files.filter(f => !fileIds.includes(f.id)));
+    if (globalSearchResults) {
+      setGlobalSearchResults(globalSearchResults.filter(f => !fileIds.includes(f.id)));
+    }
+    if (currentFolderId === 'root') {
+      setFolders(folders.filter(f => !fileIds.includes(f.id)));
+    }
+    setSelectedFileIds(new Set());
+
     try {
-      for (const fileId of fileIds) {
+      await Promise.all(fileIds.map(async (fileId) => {
         if (targetFolderId === 'trash') {
           await trashFile(fileId);
         } else {
           await moveFile(fileId, targetFolderId);
         }
-      }
-      // Remove from grid immediately since it moved out of current folder
-      setFiles(files.filter(f => !fileIds.includes(f.id)));
-      if (globalSearchResults) {
-        setGlobalSearchResults(globalSearchResults.filter(f => !fileIds.includes(f.id)));
-      }
-      
-      // If a root folder was moved, remove it from the sidebar
-      if (currentFolderId === 'root') {
-        setFolders(folders.filter(f => !fileIds.includes(f.id)));
-      }
-      
-      setSelectedFileIds(new Set());
+      }));
     } catch (err) {
       alert("Failed to move item(s): " + err.message);
     } finally {
