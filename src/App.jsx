@@ -15,9 +15,9 @@ function App() {
     <div className="app-container">
       {/* Framer Ambient Gradient Background */}
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, overflow: 'hidden', pointerEvents: 'none' }}>
-        <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(212,77,240,0.18) 0%, rgba(0,0,0,0) 65%)', filter: 'blur(90px)' }} />
-        <div style={{ position: 'absolute', bottom: '-20%', right: '-10%', width: '50vw', height: '50vw', background: 'radial-gradient(circle, rgba(106,76,245,0.18) 0%, rgba(0,0,0,0) 65%)', filter: 'blur(90px)' }} />
-        <div style={{ position: 'absolute', top: '20%', right: '10%', width: '40vw', height: '40vw', background: 'radial-gradient(circle, rgba(255,122,61,0.1) 0%, rgba(0,0,0,0) 65%)', filter: 'blur(90px)' }} />
+        <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(212,77,240,0.35) 0%, rgba(0,0,0,0) 65%)', filter: 'blur(90px)' }} />
+        <div style={{ position: 'absolute', bottom: '-20%', right: '-10%', width: '50vw', height: '50vw', background: 'radial-gradient(circle, rgba(106,76,245,0.35) 0%, rgba(0,0,0,0) 65%)', filter: 'blur(90px)' }} />
+        <div style={{ position: 'absolute', top: '20%', right: '10%', width: '40vw', height: '40vw', background: 'radial-gradient(circle, rgba(255,122,61,0.25) 0%, rgba(0,0,0,0) 65%)', filter: 'blur(90px)' }} />
       </div>
 
       {/* Top Nav */}
