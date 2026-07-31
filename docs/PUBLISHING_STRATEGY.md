@@ -1,6 +1,6 @@
 # Publishing & Go-To-Market Strategy
 
-This document outlines the step-by-step process for releasing products to the public. It is divided into two phases: **Phase 1** for free Chrome Extensions (like Nexus File Manager) and **Phase 2** for future paid applications.
+This document outlines the step-by-step process for releasing products to the public. It is divided into two phases: **Phase 1** for free Chrome Extensions (like Nexus Drive Organizer) and **Phase 2** for future paid applications.
 
 ---
 

@@ -1,6 +1,6 @@
 # Deployment Guide & Runbook
 
-This guide covers how to build, load, and troubleshoot the Nexus File Manager Chrome Extension.
+This guide covers how to build, load, and troubleshoot the Nexus Drive Organizer Chrome Extension.
 
 ## Prerequisites
 - Node.js & npm installed.

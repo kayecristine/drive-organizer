@@ -2,7 +2,7 @@
 
 ## High-Level Overview
 
-Nexus File Manager is a Chrome Extension built with React and Vite. It functions as an **App Launcher**; clicking the extension icon launches the full-page React application in a new tab.
+Nexus Drive Organizer is a Chrome Extension built with React and Vite. It functions as an **App Launcher**; clicking the extension icon launches the full-page React application in a new tab.
 
 All Google Drive interactions happen directly from the extension to Google's Drive APIs, authenticated via `chrome.identity` (Manifest V3 native OAuth — no external scripts required).
 
@@ -10,7 +10,7 @@ All Google Drive interactions happen directly from the extension to Google's Dri
 flowchart TD
     User((User Browser))
     Extension[Chrome Extension: App Launcher]
-    ViteApp[React SPA - Nexus File Manager]
+    ViteApp[React SPA - Nexus Drive Organizer]
     ChromeIdentity[chrome.identity API]
     GoogleDrive[Google Drive API v3]
 

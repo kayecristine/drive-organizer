@@ -26,7 +26,7 @@ function App() {
         marginBottom: '12px', borderBottom: '1px solid var(--border-color)', paddingBottom: '12px'
       }}>
         <span style={{ fontWeight: 800, fontSize: '1.1rem', color: 'var(--text-primary)', marginRight: '24px', letterSpacing: '0px' }}>
-          NEXUS
+          NEXUS DRIVE ORGANIZER
         </span>
         {TABS.map(({ id, label, icon: Icon }) => (
           <button

@@ -3,7 +3,7 @@
 ### Decision: Extracting to a Standalone App
 **Date**: July 2026
 
-- **Context**: Nexus File Manager (formerly Drive Organizer) was tightly coupled with the main productivity-app dashboard. Users requested the ability to deploy and run the Drive organization feature independently.
+- **Context**: Nexus Drive Organizer (formerly Drive Organizer) was tightly coupled with the main productivity-app dashboard. Users requested the ability to deploy and run the Drive organization feature independently.
 - **Options Considered**:
   - **Option A**: Build a toggle in the main app to hide other features.
   - **Option B**: Extract the feature into a new React app with stubbed dependencies.

@@ -1,4 +1,4 @@
-# Nexus File Manager - User Guide
+# Nexus Drive Organizer - User Guide
 
 Welcome to Nexus! This extension is designed to help you regain control over your messy Google Drive by identifying large files, tracking down duplicates, and sorting loose files using AI.
 

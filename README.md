@@ -1,4 +1,4 @@
-# Nexus File Manager 🚀
+# Nexus Drive Organizer 🚀
 
 A standalone, React + Vite Chrome Extension designed to centralize, triage, and organize Google Drive files with a premium dark-mode, glassmorphism UI. Extracted from a larger productivity suite, this tool is now a lightweight, client-side browser extension for maximum portability and ease of use.
 
@@ -12,7 +12,7 @@ The application is designed as a Manifest V3 Chrome Extension. It functions as a
 flowchart TD
     User((User Browser))
     Extension[Chrome Extension: App Launcher]
-    ViteApp[React SPA - Nexus File Manager]
+    ViteApp[React SPA - Nexus Drive Organizer]
     ChromeIdentity[chrome.identity API]
     GoogleDrive[Google Drive API v3]
 
