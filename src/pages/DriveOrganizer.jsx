@@ -502,8 +502,8 @@ export default function DriveOrganizer() {
 
       {/* BYOK MODAL */}
       {showByokModal && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div style={{ background: 'var(--bg-panel)', border: '1px solid var(--border-color)', borderRadius: '16px', padding: '32px', maxWidth: 480, width: '90%' }}>
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(12px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ background: '#0a0a0a', border: '1px solid var(--border-color)', borderRadius: '16px', padding: '32px', maxWidth: 480, width: '90%', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)' }}>
             <h2 style={{ margin: '0 0 8px', fontSize: '1.4rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
               🤖 AI Scan — API Key Required
             </h2>
