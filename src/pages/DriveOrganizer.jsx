@@ -52,19 +52,20 @@ function FolderTreeItem({ folder, depth, currentFolderId, onSelect, onDrop, fold
           onDrop(e, folder.id); 
         }}
         style={{ 
-          padding: `8px 12px 8px ${8 + depth * 16}px`, 
+          padding: `12px 12px 12px ${12 + depth * 16}px`, 
           background: currentFolderId === folder.id ? 'rgba(16, 185, 129, 0.15)' : 'transparent', 
           border: '1px solid', borderColor: currentFolderId === folder.id ? 'var(--color-primary)' : 'transparent', 
           borderRadius: '8px',
-          display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', cursor: 'pointer'
+          marginBottom: '4px',
+          display: 'flex', alignItems: 'center', gap: '10px', transition: 'all 0.2s', cursor: 'pointer'
         }}
       >
         <button onClick={toggleExpand} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', color: 'var(--text-secondary)' }}>
           {isLoading ? <RefreshCw size={14} className="spin" /> : 
            isExpanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
         </button>
-        <Folder size={16} color={currentFolderId === folder.id ? 'var(--color-primary)' : 'var(--text-secondary)'} style={{ flexShrink: 0 }} />
-        <span style={{ fontSize: '0.9rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', fontWeight: currentFolderId === folder.id ? 700 : 500, color: currentFolderId === folder.id ? 'var(--color-primary)' : 'var(--text-primary)' }}>{folder.name}</span>
+        <Folder size={16} color={currentFolderId === folder.id ? 'var(--color-primary)' : 'var(--text-secondary)'} style={{ flexShrink: 0, pointerEvents: 'none' }} />
+        <span style={{ fontSize: '0.9rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', fontWeight: currentFolderId === folder.id ? 700 : 500, color: currentFolderId === folder.id ? 'var(--color-primary)' : 'var(--text-primary)', pointerEvents: 'none' }}>{folder.name}</span>
       </div>
       
       {isExpanded && subfolders.map(sub => (
