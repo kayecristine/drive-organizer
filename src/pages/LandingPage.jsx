@@ -3,13 +3,15 @@ import React from 'react';
 export default function LandingPage() {
   return (
     <div style={{
-      minHeight: '100vh',
+      height: '100vh',
       width: '100vw',
-      background: 'var(--bg-primary)',
+      background: 'var(--bg-main)',
       color: 'var(--text-primary)',
       display: 'flex',
       flexDirection: 'column',
-      fontFamily: '"Space Grotesk", sans-serif'
+      fontFamily: '"Space Grotesk", sans-serif',
+      overflowY: 'auto',
+      overflowX: 'hidden'
     }}>
       {/* Background Gradients */}
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 0, overflow: 'hidden', pointerEvents: 'none' }}>
@@ -17,7 +19,7 @@ export default function LandingPage() {
         <div style={{ position: 'absolute', bottom: '-20%', right: '-10%', width: '50vw', height: '50vw', background: 'radial-gradient(circle, rgba(106,76,245,0.15) 0%, rgba(0,0,0,0) 65%)', filter: 'blur(90px)' }} />
       </div>
 
-      <div style={{ position: 'relative', zIndex: 1, maxWidth: '1000px', margin: '0 auto', padding: '40px 24px', display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <div style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '1000px', margin: '0 auto', padding: '40px 24px', display: 'flex', flexDirection: 'column', minHeight: '100%' }}>
         {/* Header */}
         <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '80px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -26,7 +28,7 @@ export default function LandingPage() {
           </div>
           <a href="https://chrome.google.com/webstore" target="_blank" rel="noreferrer" style={{
             background: 'var(--color-primary)',
-            color: 'white',
+            color: 'var(--color-primary-text)',
             padding: '10px 24px',
             borderRadius: '99px',
             textDecoration: 'none',
