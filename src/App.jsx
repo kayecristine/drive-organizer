@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import DriveOrganizer from './pages/DriveOrganizer';
 import StorageHealth from './pages/StorageHealth';
+import LandingPage from './pages/LandingPage';
 import { FolderKanban, HardDrive } from 'lucide-react';
 
 const TABS = [
@@ -10,6 +11,13 @@ const TABS = [
 
 function App() {
   const [activeTab, setActiveTab] = useState('organizer');
+
+  // Check if running as a Chrome Extension. If not, show the Landing Page.
+  const isExtension = typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.id;
+  
+  if (!isExtension) {
+    return <LandingPage />;
+  }
 
   return (
     <div className="app-container">
