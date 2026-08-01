@@ -28,3 +28,13 @@
   - **Option B**: Convert the app into a Chrome Extension (MV3).
 - **Chosen Option & Why**: **Option B**. A Chrome Extension natively supports `chrome.identity`, completely eliminating the need for external Google Identity scripts and simplifying OAuth. It also removes the need for Docker, allowing users to run the app entirely on the client side with zero infrastructure overhead.
 - **Revisit If**: The app needs to be used by non-Chrome users (e.g., Safari/Firefox) or requires heavy backend processing that can't be done in a browser extension context.
+
+### Decision: Hybrid Extension/Vercel Architecture for OAuth Verification
+**Date**: August 2026
+
+- **Context**: To publish the Chrome Extension to the public and avoid the "Unverified App" warning, Google requires the app to undergo Trust & Safety verification. The automated verification bots require a public-facing Application Home Page that clearly outlines the app's purpose and privacy policy, but the bot cannot render React single-page applications.
+- **Options Considered**:
+  - **Option A**: Build a separate website repository for the landing page.
+  - **Option B**: Use Vercel to host the existing extension repository, serving a pure static `about.html` page to Google bots, while continuing to serve the React app within the Chrome Extension environment.
+- **Chosen Option & Why**: **Option B**. Consolidating the landing page and the extension codebase in a single repository reduces maintenance overhead. Vercel automatically deploys the static files from the `/public` directory without triggering a React render on those specific routes, perfectly satisfying Google's raw HTML scraping bots while providing a beautiful public-facing presence.
+- **Revisit If**: The landing page needs complex interactivity, server-side rendering, or a dedicated marketing blog, at which point a separate Next.js marketing repo may be required.

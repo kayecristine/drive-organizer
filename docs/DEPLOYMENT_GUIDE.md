@@ -68,9 +68,19 @@ After making code changes, run `npm run build` again, then click the **🔄 refr
 
 If you decide to publish this extension to the Chrome Web Store for the general public, you **must** complete the Google OAuth Verification Process so users don't see the "Google hasn't verified this app" warning.
 
-**Verification Checklist:**
-1. Switch the app status from **Testing** to **In Production** in Google Cloud Console.
-2. Provide a **Privacy Policy** and **Terms of Service** link on your OAuth Consent Screen.
-3. Verify ownership of your application's domain via Google Search Console.
-4. Submit a **YouTube video** demonstrating how your extension uses the requested Drive scopes.
-5. Wait for Google's Trust & Safety team to review and approve your application.
+### Vercel Landing Page Deployment
+Google Trust & Safety bots require a public-facing HTML landing page that clearly explains the app's purpose, the requested scopes, and a privacy policy. Because bots cannot parse React single-page applications, we deploy a hybrid architecture via Vercel:
+- The React application is built via `npm run build` and runs inside the Chrome Extension.
+- A purely static HTML site (`public/about.html` and `public/privacy.html`) is deployed to Vercel (e.g., `https://nexus-drive-organizer.vercel.app`).
+
+### Verification Checklist:
+1. **Deploy to Vercel**: Connect your GitHub repository to Vercel. Ensure `public/about.html` and `public/privacy.html` are accessible.
+2. **Google Search Console**: Verify ownership of the URL prefix `https://nexus-drive-organizer.vercel.app/about.html` using the HTML meta tag method (inject the tag into the `<head>` of `public/about.html` and `index.html`).
+3. **Google Cloud Console - Branding**:
+   - Application home page: `https://nexus-drive-organizer.vercel.app/about.html`
+   - Privacy Policy link: `https://nexus-drive-organizer.vercel.app/privacy.html`
+4. **Google Cloud Console - Data Access**:
+   - Add the restricted scope `https://www.googleapis.com/auth/drive`.
+   - Provide a justification explaining the core features (File Triage, AI Auto-Pilot, Duplicate Scanner).
+   - Link an unlisted YouTube video demonstrating the OAuth flow and scope usage.
+5. **Submit for Verification**: If the automated bot fails due to the Vercel domain structure, click "I believe the issues found are incorrect" and request a manual review by pointing them to the `/about.html` page and the Search Console verification.

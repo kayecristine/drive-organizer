@@ -53,11 +53,3 @@ Before you hit record, ensure the following are visible on your screen:
 2. Go to your Google Cloud Console > APIs & Services > OAuth consent screen.
 3. Paste the YouTube link into the "YouTube video link" field in your verification submission.
 4. Submit for review!
-
----
-
-## 📤 Submission Steps
-1. Upload the video to YouTube as **Unlisted**.
-2. Go to your Google Cloud Console > APIs & Services > OAuth consent screen.
-3. Paste the YouTube link into the "YouTube video link" field in your verification submission.
-4. Submit for review!

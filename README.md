@@ -44,9 +44,12 @@ Because this app handles sensitive cloud documents, security is handled via Chro
 - **Native Chrome OAuth (`chrome.identity`):** All Google OAuth tokens remain entirely in the browser memory and extension secure storage. We do not use third-party scripts.
 - **Scope Restriction:** The app only requests the minimum required Google scopes to read and move files (`auth/drive`, `auth/calendar`).
 
-### Roadmap for Public Deployment
-If published to the public Chrome Web Store, the following security and policy requirements must be met:
-- **Google App Verification:** The Google Cloud Project's OAuth Consent Screen must pass Google's rigorous verification process to remove the "Unverified App" warning (requires a Privacy Policy, Domain Verification, and a video demonstration).
+### Publishing to the Public
+To publish this extension to the public Chrome Web Store, the Google Cloud Project's OAuth Consent Screen must pass Google's rigorous Trust & Safety verification process to remove the "Unverified App" warning.
+
+Because Google's automated verification bots require a static Application Home Page and cannot parse React SPAs, this repository utilizes a **Hybrid Deployment Architecture**:
+- The React application is built and loaded natively inside the Chrome Extension environment.
+- A pure static HTML landing page (`public/about.html`) is deployed to **Vercel** (`https://nexus-drive-organizer.vercel.app`), serving as the verified, public-facing home page for Google Trust & Safety bots.
 
 ---
 
