@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus Drive Organizer - AI-Powered Google Drive Organization</title>
+  <meta name="description" content="Nexus Drive Organizer is a Chrome Extension that helps you organize your Google Drive using AI-powered categorization, duplicate detection, and a smart manual triage system." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0a0a0a;
+      color: #ffffff;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    header {
+      padding: 32px 0;
+      border-bottom: 1px solid #222;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-decoration: none;
+    }
+    .logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+    }
+    .cta-btn {
+      background: #ffffff;
+      color: #000000;
+      padding: 10px 24px;
+      border-radius: 99px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: opacity 0.2s;
+    }
+    .cta-btn:hover { opacity: 0.85; }
+    hero {
+      display: block;
+      text-align: center;
+      padding: 100px 0 80px;
+    }
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #ffffff 40%, #888888 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      color: #999;
+      max-width: 600px;
+      margin: 0 auto 48px;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      padding: 60px 0;
+      border-top: 1px solid #1a1a1a;
+    }
+    .feature-card {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .feature-card h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .feature-card p {
+      color: #888;
+      font-size: 0.95rem;
+    }
+    footer {
+      border-top: 1px solid #1a1a1a;
+      padding: 32px 0;
+      color: #555;
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer a { color: #777; text-decoration: none; }
+    footer a:hover { color: #aaa; }
+    @media (max-width: 600px) {
+      h1 { font-size: 2.2rem; }
+      hero { padding: 60px 0 40px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a class="logo" href="/about.html">
+        <img src="/nexus-logo.png" alt="Nexus Drive Organizer logo" />
+        Nexus Drive Organizer
+      </a>
+      <a class="cta-btn" href="https://chrome.google.com/webstore" target="_blank" rel="noreferrer">Add to Chrome</a>
+    </header>
+
+    <hero>
+      <h1>Organize your Google Drive,<br/>powered by AI.</h1>
+      <p class="subtitle">
+        Nexus Drive Organizer is a Chrome Extension that helps you declutter your workspace. Automatically group loose files with AI, find and delete hidden duplicates, and manually triage files with a blazing-fast drag-and-drop interface.
+      </p>
+      <a class="cta-btn" href="https://chrome.google.com/webstore" target="_blank" rel="noreferrer">Add to Chrome — It's Free</a>
+    </hero>
+
+    <section class="features">
+      <div class="feature-card">
+        <h2>🤖 AI Auto-Pilot</h2>
+        <p>Bring your own API key and let AI automatically read your file names and types, then categorize and move them into smart folders — all with one click.</p>
+      </div>
+      <div class="feature-card">
+        <h2>📂 Manual File Triage</h2>
+        <p>Review all your loose Google Drive files in a clean, sortable interface. Drag and drop files into folders, or bulk-select and move them in seconds.</p>
+      </div>
+      <div class="feature-card">
+        <h2>🧹 Storage Health Scanner</h2>
+        <p>Scans your entire Google Drive to find byte-for-byte duplicate files. Preview, compare, and delete duplicates to reclaim storage space instantly.</p>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2026 Nexus Drive Organizer. All rights reserved.</span>
+      <div style="display:flex; gap:24px;">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="mailto:kayecristine.tolentino@gmail.com">Contact</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
