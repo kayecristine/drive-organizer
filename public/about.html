@@ -3,158 +3,283 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nexus Drive Organizer - AI-Powered Google Drive Organization</title>
+  <title>Nexus Drive Organizer — AI-Powered Google Drive Organizer Chrome Extension</title>
   <meta name="description" content="Nexus Drive Organizer is a Chrome Extension that helps you organize your Google Drive using AI-powered categorization, duplicate detection, and a smart manual triage system." />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background: #0a0a0a;
       color: #ffffff;
-      line-height: 1.6;
-      min-height: 100vh;
+      line-height: 1.7;
     }
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+    a { color: #a78bfa; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+    /* Header */
     header {
-      padding: 32px 0;
-      border-bottom: 1px solid #222;
+      padding: 28px 0;
+      border-bottom: 1px solid #1e1e1e;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
     }
     .logo {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 700;
-      color: #ffffff;
-      text-decoration: none;
+      color: #fff;
     }
-    .logo img {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-    }
+    .logo img { width: 36px; height: 36px; border-radius: 8px; }
     .cta-btn {
-      background: #ffffff;
-      color: #000000;
-      padding: 10px 24px;
+      background: #fff;
+      color: #000;
+      padding: 10px 22px;
       border-radius: 99px;
-      text-decoration: none;
       font-weight: 600;
       font-size: 0.9rem;
-      transition: opacity 0.2s;
     }
-    .cta-btn:hover { opacity: 0.85; }
-    hero {
-      display: block;
+    .cta-btn:hover { opacity: 0.85; text-decoration: none; }
+
+    /* Hero */
+    .hero {
       text-align: center;
-      padding: 100px 0 80px;
+      padding: 80px 0 64px;
+      border-bottom: 1px solid #1a1a1a;
     }
-    h1 {
-      font-size: 3.5rem;
+    .hero h1 {
+      font-size: 3rem;
       font-weight: 800;
       letter-spacing: -1px;
-      line-height: 1.1;
-      margin-bottom: 24px;
-      background: linear-gradient(135deg, #ffffff 40%, #888888 100%);
+      line-height: 1.15;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #fff 40%, #777 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .subtitle {
-      font-size: 1.2rem;
+    .hero p {
+      font-size: 1.15rem;
       color: #999;
-      max-width: 600px;
-      margin: 0 auto 48px;
+      max-width: 620px;
+      margin: 0 auto 36px;
     }
-    .features {
+
+    /* Sections */
+    section { padding: 60px 0; border-bottom: 1px solid #1a1a1a; }
+    section:last-of-type { border-bottom: none; }
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #e2e2e2;
+    }
+    p { color: #999; margin-bottom: 16px; }
+    p:last-child { margin-bottom: 0; }
+
+    /* Feature grid */
+    .feature-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      padding: 60px 0;
-      border-top: 1px solid #1a1a1a;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
     }
     .feature-card {
       background: #111;
       border: 1px solid #222;
-      border-radius: 16px;
-      padding: 28px;
+      border-radius: 14px;
+      padding: 24px;
     }
-    .feature-card h2 {
-      font-size: 1.1rem;
-      font-weight: 700;
+    .feature-card .icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .feature-card h3 { color: #fff; margin-bottom: 8px; }
+    .feature-card p { color: #777; font-size: 0.92rem; margin: 0; }
+
+    /* Permissions table */
+    .permission-block {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 14px;
+      padding: 24px;
+      margin-top: 24px;
+    }
+    .permission-block + .permission-block { margin-top: 12px; }
+    .permission-block .scope {
+      font-family: "Courier New", monospace;
+      font-size: 0.85rem;
+      color: #a78bfa;
+      background: rgba(167, 139, 250, 0.1);
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
       margin-bottom: 10px;
-      color: #fff;
     }
-    .feature-card p {
-      color: #888;
+    .permission-block p { color: #777; font-size: 0.93rem; margin: 0; }
+
+    /* Principles list */
+    .principles { list-style: none; margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .principles li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: #111;
+      border: 1px solid #1e1e1e;
+      border-radius: 12px;
+      padding: 16px 20px;
+      color: #999;
       font-size: 0.95rem;
     }
+    .principles li span.check { color: #4ade80; font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+
+    /* Footer */
     footer {
-      border-top: 1px solid #1a1a1a;
       padding: 32px 0;
-      color: #555;
-      font-size: 0.85rem;
+      border-top: 1px solid #1a1a1a;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
+      color: #444;
+      font-size: 0.85rem;
     }
-    footer a { color: #777; text-decoration: none; }
+    footer a { color: #666; }
     footer a:hover { color: #aaa; }
+
     @media (max-width: 600px) {
-      h1 { font-size: 2.2rem; }
-      hero { padding: 60px 0 40px; }
+      .hero h1 { font-size: 2rem; }
+      .hero { padding: 50px 0 40px; }
+      h2 { font-size: 1.3rem; }
     }
   </style>
 </head>
 <body>
   <div class="container">
+
     <header>
-      <a class="logo" href="/about.html">
-        <img src="/nexus-logo.png" alt="Nexus Drive Organizer logo" />
+      <div class="logo">
+        <img src="/nexus-logo.png" alt="Nexus Drive Organizer icon" />
         Nexus Drive Organizer
-      </a>
+      </div>
       <a class="cta-btn" href="https://chrome.google.com/webstore" target="_blank" rel="noreferrer">Add to Chrome</a>
     </header>
 
-    <hero>
+    <!-- HERO -->
+    <div class="hero">
       <h1>Organize your Google Drive,<br/>powered by AI.</h1>
-      <p class="subtitle">
-        Nexus Drive Organizer is a Chrome Extension that helps you declutter your workspace. Automatically group loose files with AI, find and delete hidden duplicates, and manually triage files with a blazing-fast drag-and-drop interface.
+      <p>
+        Nexus Drive Organizer is a Chrome Extension that gives you a powerful, intelligent workspace for managing your Google Drive files. Triage loose files manually, find and remove duplicates automatically, and let AI categorize your entire Drive with a single click.
       </p>
       <a class="cta-btn" href="https://chrome.google.com/webstore" target="_blank" rel="noreferrer">Add to Chrome — It's Free</a>
-    </hero>
+    </div>
 
-    <section class="features">
-      <div class="feature-card">
-        <h2>🤖 AI Auto-Pilot</h2>
-        <p>Bring your own API key and let AI automatically read your file names and types, then categorize and move them into smart folders — all with one click.</p>
+    <!-- WHAT IT DOES -->
+    <section>
+      <h2>What Nexus Drive Organizer Does</h2>
+      <p>
+        Google Drive is powerful, but over time it becomes cluttered with thousands of loose, unsorted files. Nexus Drive Organizer solves this by providing three core tools that work directly with your Google Drive data:
+      </p>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="icon">📂</div>
+          <h3>Manual File Triage</h3>
+          <p>
+            Browse all your unsorted Google Drive files in a clean, sortable interface. Select files individually or in bulk, then drag and drop them into any folder or use the quick-move panel. Full visibility over your entire Drive.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">🔍</div>
+          <h3>Duplicate File Scanner</h3>
+          <p>
+            Scans your Google Drive to identify files that share the same name and file size — a reliable indicator of exact duplicates. Review matched pairs side-by-side and permanently delete the ones you don't need to reclaim storage.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">🤖</div>
+          <h3>AI Auto-Pilot Organizer</h3>
+          <p>
+            Connect your own AI API key (e.g., Google Gemini or OpenAI). The extension reads your file names and MIME types, sends them to the AI, and receives smart folder groupings. It then automatically creates folders and moves files — entirely within your Google Drive.
+          </p>
+        </div>
       </div>
-      <div class="feature-card">
-        <h2>📂 Manual File Triage</h2>
-        <p>Review all your loose Google Drive files in a clean, sortable interface. Drag and drop files into folders, or bulk-select and move them in seconds.</p>
+    </section>
+
+    <!-- WHY WE NEED GOOGLE DRIVE ACCESS -->
+    <section>
+      <h2>Why This App Needs Google Drive Access</h2>
+      <p>
+        To perform file organization, Nexus Drive Organizer requires access to your Google Drive through the Google Drive API. Below is a precise explanation of every permission requested and exactly why it is necessary for the application to function.
+      </p>
+
+      <div class="permission-block">
+        <div class="scope">https://www.googleapis.com/auth/drive</div>
+        <h3>Full Google Drive Access</h3>
+        <p>
+          This permission is required because the application needs to: (1) <strong>list all files</strong> in your Drive to populate the File Manager and Duplicate Scanner; (2) <strong>read file metadata</strong> (name, MIME type, size, parent folder) to power the AI categorizer and duplicate detection; (3) <strong>create new folders</strong> in your Drive when the AI Auto-Pilot groups files; and (4) <strong>move files between folders</strong> when you triage them manually or when the AI Auto-Pilot reorganizes them. All four actions are core functions of the extension and cannot be performed with a narrower scope.
+        </p>
       </div>
-      <div class="feature-card">
-        <h2>🧹 Storage Health Scanner</h2>
-        <p>Scans your entire Google Drive to find byte-for-byte duplicate files. Preview, compare, and delete duplicates to reclaim storage space instantly.</p>
-      </div>
+    </section>
+
+    <!-- DATA PRACTICES -->
+    <section>
+      <h2>Our Data & Privacy Principles</h2>
+      <p>
+        We believe in full transparency about how your data is used. Here is exactly what happens when you use Nexus Drive Organizer:
+      </p>
+      <ul class="principles">
+        <li>
+          <span class="check">✓</span>
+          <div><strong style="color:#e2e2e2;">All processing is local.</strong> Your Google Drive file list is fetched directly from the Google Drive API into your browser. No file data is routed through or stored on any Nexus server.</div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div><strong style="color:#e2e2e2;">We do not store your files or metadata.</strong> Nexus Drive Organizer does not operate any backend database. When you close the extension, your Drive data is cleared from memory.</div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div><strong style="color:#e2e2e2;">AI features use your own API key.</strong> If you use the AI Auto-Pilot, you provide your own API key. File names and types are sent directly from your browser to your chosen AI provider (e.g., Google Gemini). Nexus never sees or stores your API key or your files.</div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div><strong style="color:#e2e2e2;">We do not sell or share your data.</strong> No personal information, Google account data, or Drive metadata is sold, rented, or shared with any third party for any purpose.</div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div><strong style="color:#e2e2e2;">Authentication is handled by Google.</strong> Sign-in is performed entirely through Google's official Chrome Identity API. OAuth tokens are managed by your Chrome browser and are never transmitted to Nexus servers.</div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section>
+      <h2>How It Works</h2>
+      <p>
+        Nexus Drive Organizer is a Chrome Extension — it runs entirely inside your Chrome browser as an extension popup. There is no separate website or web app to log into. After installing from the Chrome Web Store, you click the extension icon in your browser toolbar, sign in with your Google Account, and begin organizing your Drive immediately.
+      </p>
+      <p>
+        The extension communicates directly and exclusively with the Google Drive API on your behalf using the OAuth 2.0 token issued by your Chrome browser. All file organization actions (moving, creating folders, deleting duplicates) are performed through official Google Drive API calls.
+      </p>
     </section>
 
     <footer>
       <span>© 2026 Nexus Drive Organizer. All rights reserved.</span>
-      <div style="display:flex; gap:24px;">
+      <div style="display:flex; gap:20px; flex-wrap:wrap;">
         <a href="/privacy.html">Privacy Policy</a>
-        <a href="mailto:kayecristine.tolentino@gmail.com">Contact</a>
+        <a href="mailto:kayecristine.tolentino@gmail.com">Contact Developer</a>
       </div>
     </footer>
+
   </div>
 </body>
 </html>
